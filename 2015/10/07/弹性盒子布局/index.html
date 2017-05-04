@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="弹性盒子布局">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Markdown语法学习笔记"/>
+  <meta property="og:description" content="弹性盒子布局" />
+  <meta property="og:site_name" content="小猫的blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Markdown语法学习笔记</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2015-10-07</span>
+            <span class="time">10:37:23</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/CSS/">CSS</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Flex布局/">#Flex布局</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="弹性盒子布局"><a href="#弹性盒子布局" class="headerlink" title="弹性盒子布局"></a>弹性盒子布局</h1><h3 id="什么是弹性盒子布局"><a href="#什么是弹性盒子布局" class="headerlink" title="什么是弹性盒子布局"></a>什么是弹性盒子布局</h3><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为Flex布局。<br><strong>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</strong></p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。<br>项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。<br><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" alt=""></p>
+<h3 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h3><ol>
+<li>flex-direction<br>决定主轴的方向（即项目的排列方向）。  <pre>
+  .box{
+  flex-direction: row|column|row-reverse|column-reverse
+  //分别代表:水平左开始|垂直上开始|水平右开始|垂直下开始
+}</pre>  </li>
+<li>flex-wrap<br>如果一条轴线排不下，如何换行。(默认不换行)   <pre>
+  .box{
+    flex-wrap: nowrap | wrap | wrap-reverse;
+  //分别代表:不换行|换行,第一行在上|换行,第一行在下
+}</pre>  </li>
+<li>flex-flow<br>是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。 <pre>
+  .box{
+    flex-flow: \<flex-direction\> || \<flex-wrap\>;
+}</flex-wrap\></flex-direction\></pre>  </li>
+<li>justify-content<br>定义了项目在主轴上的对齐方式   <pre>
+  .box{
+    justify-content: flex-start | flex-end | center |  
+     space-between | space-around;  
+  //分别代表:左对齐|右对齐|居中|两端对齐|平均分布
+}</pre>  </li>
+<li>align-items<br>定义了项目在交叉轴上的对齐方式   <pre>
+  .box{
+    align-items: flex-start | flex-end | center |  
+     baseline | stretch;  
+  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|  
+  第一行文字基线对齐|未设置高度或auto,默认占满容器高度(默认)
+}</pre>  </li>
+<li>align-content<br>定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。   <pre>
+  .box{
+    align-content: flex-start | flex-end | center |  
+     space-between | space-around | stretch;  
+  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|  
+  两端对齐|平均分布|轴线占满整个交叉轴
+}</pre>  
+
+</li>
+</ol>
+<h3 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h3><ol>
+<li>order<br>定义项目的排列顺序。数值越小，排列越靠前，默认为0。   <pre>
+  .item {
+           order: \<integer\>;
+}</integer\></pre>  </li>
+<li>flex-grow<br>定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。<br>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。   <pre>
+  .item {
+           flex-grow: <number>; /* default 0 */
+}</number></pre>  </li>
+<li>flex-shrink<br>定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。<br>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。   <pre>
+  .item {
+           flex-shrink: <number>; /* default 0 */
+}</number></pre>   </li>
+<li>flex-basis<br>定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。<br>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。       <pre>
+  item {
+       flex-basis: \<length\> | auto; /* default auto */
+}</length\></pre>  </li>
+<li>flex<br>是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<br>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<pre>
+  item {
+       flex: none | [ <'flex-grow'> <'flex-shrink'>? ||  
+        <'flex-basis'> ] 
+        }</'flex-basis'></'flex-shrink'></'flex-grow'></pre>   </li>
+<li>align-self<br>允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<br>可能取6个值，除了auto，其他都与align-items属性完全一致。<pre>.item {
+align-self: auto | flex-start | flex-end | center | baseline | stretch;
+} </pre>            
+
+
+
+
+
+
+</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
