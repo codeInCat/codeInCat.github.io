@@ -101,7 +101,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2015-10-14</span>
-            <span class="time">13:26:27</span>
+            <span class="time">13:28:17</span>
           </span>
           
           <!--  Categories  -->
@@ -126,7 +126,7 @@
           <h1 id="this的几种用法"><a href="#this的几种用法" class="headerlink" title="this的几种用法"></a>this的几种用法</h1><p>this是JavaScript语言的一个关键字。随着函数使用场合的不同，this的值会发生变化。JavaScript中的this指针是一个动态的变量，一个方法内的this指针并不是始终指向定义该方法的对象的。</p>
 <p>this关键字虽然会根据环境变化，但是它始终代表的是调用当前函数的那个对象。这就引出了JS中函数调用的问题。在JS中调用函数的模式可以分为4种： 方法调用模式、函数调用模式、构造器调用模式、apply调用模式。</p>
 <h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><p>当函数被当做某个对象的方法调用时,此时函数内部的this指向调用他的对象; </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	function sayName()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">	var name = &apos;window&apos;;</div><div class="line">	var obj = &#123;</div><div class="line">		name: &apos;obj&apos;,</div><div class="line">		sayName: sayName</div><div class="line">	&#125;</div><div class="line">	obj.sayName();//obj</div><div class="line">```	</div><div class="line">### 函数调用模式</div><div class="line">当函数以该模式调用时,this指向的是window对象;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">	function sayName()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">	var name = &apos;window&apos;;</div><div class="line">	var obj = &#123;</div><div class="line">		name: &apos;obj&apos;,</div><div class="line">		sayName: sayName</div><div class="line">	&#125;</div><div class="line">	obj.sayName();//obj</div><div class="line">```	</div><div class="line"></div><div class="line"></div><div class="line">### 函数调用模式</div><div class="line">当函数以该模式调用时,this指向的是window对象;</div></pre></td></tr></table></figure>
 <pre><code>function sayName(){
     alert(this.name);
 }
@@ -136,7 +136,7 @@ var obj = {
     sayName: sayName
 }
 sayName();//window
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 构造函数调用模式</div><div class="line">如果在一个函数前面加上new关键字来调用，那么就会创建一个连接到该函数的prototype成员的新对象，同时，this会被绑定到这个新对象上。即this指向该构造函数的实例对象;</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 构造函数调用模式</div><div class="line">如果在一个函数前面加上new关键字来调用，那么就会创建一个连接到该函数的prototype成员的新对象，同时，this会被绑定到这个新对象上。即this指向该构造函数的实例对象;</div></pre></td></tr></table></figure>
 <pre><code>function Dog(name,age){
     this.name = name,
     this.age = age, 
@@ -146,7 +146,7 @@ sayName();//window
 }
 var xiaobai = new Dog(&apos;xiaobai&apos;,2);
 xiaobai.sayName();//xiaobai
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">### apply/call调用模式</div><div class="line">所有函数对象都有两个方法：apply和call，这两个方法可以让我们构建一个参数数组传递给调用函数，也允许我们改变this的值。  </div><div class="line">**注意:非严格模式下,apply未传参或第一个参数是null或undefined时,this指向的是window**</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### apply/call调用模式</div><div class="line">所有函数对象都有两个方法：apply和call，这两个方法可以让我们构建一个参数数组传递给调用函数，也允许我们改变this的值。  </div><div class="line">**注意:非严格模式下,apply未传参或第一个参数是null或undefined时,this指向的是window**</div></pre></td></tr></table></figure>
 <pre><code>var name = &quot;window&quot;;
 var person = {
     name: &quot;xiaobai&quot;
