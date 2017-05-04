@@ -101,7 +101,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2015-10-07</span>
-            <span class="time">10:42:30</span>
+            <span class="time">13:26:27</span>
           </span>
           
           <!--  Categories  -->
@@ -142,23 +142,18 @@
 }</flex-wrap\></flex-direction\></pre>  </li>
 <li>justify-content<br>定义了项目在主轴上的对齐方式   <pre>
   .box{
-    justify-content: flex-start | flex-end | center |  
-     space-between | space-around;  
+    justify-content: flex-start | flex-end | center |space-between | space-around;  
   //分别代表:左对齐|右对齐|居中|两端对齐|平均分布
 }</pre>  </li>
 <li>align-items<br>定义了项目在交叉轴上的对齐方式   <pre>
   .box{
-    align-items: flex-start | flex-end | center |  
-     baseline | stretch;  
-  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|  
-  第一行文字基线对齐|未设置高度或auto,默认占满容器高度(默认)
+    align-items: flex-start | flex-end | center | baseline | stretch;  
+  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|第一行文字基线对齐|未设置高度或auto,默认占满容器高度(默认)
 }</pre>  </li>
 <li>align-content<br>定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。   <pre>
   .box{
-    align-content: flex-start | flex-end | center |  
-     space-between | space-around | stretch;  
-  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|  
-  两端对齐|平均分布|轴线占满整个交叉轴
+    align-content: flex-start | flex-end | center | space-between | space-around | stretch;  
+  //分别代表:交叉起点对齐|交叉终点对齐|交叉中点对齐|两端对齐|平均分布|轴线占满整个交叉轴
 }</pre>  
 
 </li>
@@ -182,11 +177,10 @@
 }</length\></pre>  </li>
 <li>flex<br>是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<br>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<pre>
   item {
-       flex: none | [ <'flex-grow'> <'flex-shrink'>? ||  
-        <'flex-basis'> ] 
+       flex: none | [ <'flex-grow'> <'flex-shrink'>? ||<'flex-basis'> ] 
         }</'flex-basis'></'flex-shrink'></'flex-grow'></pre>   </li>
 <li>align-self<br>允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<br>可能取6个值，除了auto，其他都与align-items属性完全一致。<pre>.item {
-align-self: auto | flex-start | flex-end | center | baseline | stretch;
+align-self: auto | flex-start | flex-end | center |baseline | stretch;
 } </pre>            
 
 
