@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JS中的异常处理">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS中异常处理"/>
+  <meta property="og:description" content="JS中的异常处理" />
+  <meta property="og:site_name" content="小猫的前端学习日记"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的前端学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的前端学习日记</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS中异常处理</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2016-03-18</span>
+            <span class="time">23:17:38</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/JavaScript/">JavaScript</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/异常处理/">#异常处理</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p><strong>常见的异常分类</strong> </p>
+<ul>
+<li>运行环境的多样性导致的异常（浏览器）</li>
+<li>语法错误，代码错误</li>
+</ul>
+<p><code>异常的特征</code>:一旦代码出现异常，后面的代码就不会再执行</p>
+<p><strong>异常捕获</strong></p>
+<p><code>使用try-catch语句捕获异常</code></p>
+<pre>
+try{
+    //这里写可能出现异常的代码
+}catch(e){
+    //这里的e就是捕获的异常对象
+    //可以在这里写，出现异常后的处理代码
+}
+</pre>
+
+<p>异常捕获语句执行的过程为：</p>
+<ol>
+<li><p>代码正常运行, 如果在 try 中出现了错误, try 里面出现错误的语句后面的代码都不再执行, 直接跳转到 catch 中</p>
+</li>
+<li><p>在 catch 中处理错误信息</p>
+</li>
+<li><p>继续执行后面的代码</p>
+</li>
+<li><p>如果 try 中没有出现错误, 那么不走 catch 直接执行后面的代码</p>
+</li>
+</ol>
+<p><code>捕获异常的优点：</code>通过try-catch语句进行异常捕获之后，代码将会继续执行，而不会中断。</p>
+<p><strong>注意</strong>：<code>语法错误异常用try-catch语句无法捕获</code>，因为在预解析阶段，语法错误会直接检测出来，而不会等到运行的时候才报错。</p>
+<p><strong>try..catch使用示例</strong></p>
+<pre>
+    //01 try ... catch结构的使用
+    //a();  若直接调用则爆出:Uncaught ReferenceError: a is not defined错误
+    //在开发中,我们对于可能会报错或者是发生异常的代码用try结构进行处理
+    try{
+        a();    //如果发生异常,那么至少不会到正程序中断
+    }
+    catch(e)
+    {
+        //如果try语句中发生了异常,那么会执行此处的代码块
+        //参数e.为具体的异常信息,可以打印进行查看
+        console.log(e);
+    }
+    function functionTest() {
+        console.log("functionTest");
+    };
+    functionTest();
+    //结论:使用try...catch结构,如果发生了异常,那么不会影响后面代码的执行,且我们可以在发生异常信息之后做出具体的处理
+</pre>
+**手动抛出异常**
+
+案例：自己写的一个函数，需要一个参数，如果用户不传参数，此时想直接给用户抛出异常，就需要了解如何抛出异常。
+
+抛出异常使用throw关键字，语法如下：
+
+`手动抛出异常信息（字符串）`
+
+<pre>
+    try{
+        //a();    //如果发生异常,那么至少不会到正程序中断
+
+        //不使用系统默认的异常信息,尝试手动抛出
+        throw "对不起,您调用了尚未定义的方法";
+    }
+    catch(e)
+    {
+        //如果try语句中发生了异常,那么会执行此处的代码块
+        //参数e.为具体的异常信息,可以打印进行查看
+        console.log(e);
+    }
+    function functionTest() {
+        console.log("functionTest");
+    };
+    functionTest();
+</pre>
+
+<p><code>手动抛出异常信息（对象）</code></p>
+<pre>
+    try{
+        //a();    //如果发生异常,那么至少不会到正程序中断
+        //不使用系统默认的异常信息,尝试手动抛出
+        throw {
+            errMsg:"具体的错误信息提示",
+            errCode:"指定错误类型的代号,如1001等"
+        };
+    }
+    catch(e)
+    {
+        //如果try语句中发生了异常,那么会执行此处的代码块
+        //参数e.为具体的异常信息,可以打印进行查看
+        console.log(e);
+        //在try语句中抛出的错误信息是什么,那么得到的异常信息就是什么
+        //如果抛出的是字符串,那么得到的就是字符串
+        //如果抛出的是对象,那么此处得到的就是对象
+        console.log(e.errMsg);
+        console.log(e.errCode);
+    }
+    function functionTest() {
+        console.log("functionTest");
+    };
+    functionTest();
+</pre>
+
+<p><strong>异常捕获语句的完整模式</strong></p>
+<p>异常捕获语句的完整模式为try-catch-finally</p>
+<p><pre><br>    try{<br>        //在执行的时候可能发生异常的代码<br>        b();<br>    }<br>    catch (e)<br>    {<br>        //如果try代码块中的代码在执行中发生了异常,那么就会执行该代码块的代码<br>        //通过打印e对象可以查看具体的异常信息<br>        console.log(e); //打印异常信息<br>    }<br>    finally {<br>        //不论try语句中的代码是否会发生异常,都一定会执行此处的代码块<br>        //一般在前端开发中很少使用,常用语后台开发的资源释放工作<br>        console.log(“无论如何总要执行的代码”);<br>    }<br></pre><br>finally中的代码，不管是否发生异常，都会执行。一般用在后端语言中，用来释放资源，JavaScript中很少会用到。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
