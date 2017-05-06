@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="值类型和引用类型">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS中值类型和引用类型"/>
+  <meta property="og:description" content="值类型和引用类型" />
+  <meta property="og:site_name" content="小猫的blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS中值类型和引用类型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2016-12-25</span>
+            <span class="time">22:17:05</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/JavaScript/">JavaScript</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/值类型和引用类型/">#值类型和引用类型</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="JS值类型和引用类型"><a href="#JS值类型和引用类型" class="headerlink" title="JS值类型和引用类型"></a>JS值类型和引用类型</h1><p><strong>01 值类型和引用类型简单说明</strong></p>
+<p>值类型主要有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">数值</div><div class="line">字符串</div><div class="line">布尔类型</div><div class="line">undefined</div><div class="line">null</div></pre></td></tr></table></figure>
+<p>引用类型主要有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">对象（Object类型）</div><div class="line">数组（Array）</div><div class="line">函数 (Function)</div></pre></td></tr></table></figure>
+<p><strong>值类型</strong>：保存为简单的数据值，赋值只是简单的数据值的复制</p>
+<p><strong>引用类型</strong>:保存为对象，其本质是指向内存位置的引用(地址)，赋值是对地址的复制</p>
+<p><strong>值类型代码示例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var num1 = 10;</div><div class="line">var num2 = num1;    //把num1的值复制一份给num2,num1和num2的值相等,除此之外没有任何其他关系</div><div class="line"></div><div class="line">console.log(num1,num2);     //10,10</div><div class="line">console.log(num1 == num2);  //true</div><div class="line"></div><div class="line">num2 = 20;          //修改num2的值为20,不会对num1产生任何的影响</div><div class="line">console.log(num1,num2);     //10,20</div><div class="line">console.log(num1 == num2);  //false</div></pre></td></tr></table></figure>
+<p><strong>引用类型代码示例</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var arr1 = [1,2,3];</div><div class="line">var arr2 = arr1;</div><div class="line">console.log(arr1,arr2);             //[1,2,3],[1,2,3]</div><div class="line">console.log(arr1 == arr2);          //true</div><div class="line"></div><div class="line">var arr3 = [1,2,3];</div><div class="line">console.log(arr3);                  //[1,2,3]</div><div class="line">console.log(arr1 == arr3,arr2 == arr3); //false,false</div><div class="line"></div><div class="line">/**</div><div class="line"> * 代码说明:</div><div class="line"> * arr1和arr2在比较的时候,值相等(都是[1,2,3]),且引用相等(都指向堆中同一块数据),因此arr1和arr2相等</div><div class="line"> * arr3和arr1以及arr2比较的时候,值相等([1,2,3]),但是引用不相等(arr3指向的是堆中另外一块数据),因此不等</div><div class="line"> * 总结:引用类型在比较相等的时候,只有值和引用都相等才相等</div><div class="line"> * */</div></pre></td></tr></table></figure>
+<p><strong>02 值类型和引用类型的赋值</strong></p>
+<p><code>赋值操作(=):把当前变量存储的值复制一份给接收的变量</code></p>
+<p><code>值类型的赋值:把当前变量存储的值(具体的数据)复制一份给接收的变量</code></p>
+<p><code>引用类型的赋值:把当前变量存储的值(具体数据的引用即地址)复制一份给接收的变量</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//引用类型使用注意</div><div class="line">  console.log(arr1,arr2);         //[1,2,3],[1,2,3];</div><div class="line">  console.log(arr1 == arr2);      //true</div><div class="line">  arr1.push(4);</div><div class="line">  console.log(arr1,arr2);         //[1,2,3,4],[1,2,3,4]</div><div class="line"></div><div class="line">  /**</div><div class="line">   * 代码说明:因为arr1和arr2内部的引用指向的是同一块数据,所以修改了arr1会对arr2也产生影响</div><div class="line">   * */</div></pre></td></tr></table></figure>
+<p><strong>03 值类型和引用类型作为函数参数处理</strong></p>
+<p><code>形参</code>:占位用的参数,用来接收数据的参数而已</p>
+<p><code>实参</code>:实际传递的参数</p>
+<p><code>函数的调用</code>:在函数调用的时候,函数默认会把实参的值赋值给形参</p>
+<p><strong>值类型作为参数</strong>：在函数内部对形参变量进行修改不会影响到实参的值</p>
+<p><strong>引用类型作为参数</strong>：在函数内部对形参变量进行修改会影响到实参的值，因为他们的引用指向同一个对象</p>
+<p><strong>04 值类型和引用类型的相关图示</strong></p>
+<p><strong>基本类型的赋值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var str1 = &quot;hello zhangsan&quot;;</div><div class="line">var str2 = str1;</div></pre></td></tr></table></figure></p>
+<p><img src="image/161225/03.png" alt="p1对象的存储结构图"></p>
+<p><strong>引用类型的结构和赋值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var car = &#123;</div><div class="line">    color:&quot;黑色&quot;,</div><div class="line">    number:&quot;B99&quot;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">var p1 = &#123;</div><div class="line">    name:&quot;王宝宝&quot;,</div><div class="line">    age:30,</div><div class="line">    car:car</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><img src="image/161225/01.png" alt="p1对象的存储结构图"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var obj1 = &#123;</div><div class="line">       name:&quot;lisi&quot;,</div><div class="line">       age:18</div><div class="line">   &#125;;</div><div class="line"></div><div class="line">   var obj2 = obj1;</div></pre></td></tr></table></figure>
+<p><img src="image/161225/02.png" alt="obj1和obj2的存储结构图"></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
