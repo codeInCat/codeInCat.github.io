@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JS中面向对象继承的几种形式">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS中面向对象继承"/>
+  <meta property="og:description" content="JS中面向对象继承的几种形式" />
+  <meta property="og:site_name" content="小猫的前端学习日记"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的前端学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的前端学习日记</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS中面向对象继承</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2016-04-15</span>
+            <span class="time">14:02:03</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/JavaScript/">JavaScript</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/面向对象/">#面向对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="面向对象继承"><a href="#面向对象继承" class="headerlink" title="面向对象继承"></a>面向对象继承</h1><h3 id="1-继承基本概念"><a href="#1-继承基本概念" class="headerlink" title="1.继承基本概念"></a>1.继承基本概念</h3><p><strong>继承的概念</strong></p>
+<p><strong>继承</strong>：即通过一定的方式实现让某个类型A获取另外一个类型B的属性或方法。其中类型A称之为子类型，类型B称之为父类型或超类型。</p>
+<p><strong>javaScript中的继承</strong></p>
+<p>Object是所有对象的父级|父类型|超类型：js中所有的对象都直接或间接的继承自Object。</p>
+<h3 id="2-JavaScript中实现继承的几种方式"><a href="#2-JavaScript中实现继承的几种方式" class="headerlink" title="2.JavaScript中实现继承的几种方式"></a>2.JavaScript中实现继承的几种方式</h3><p>说明:其他语言中继承通常通过类来实现，js中没有类的概念，js中的继承是某个对象继承另外一个对象，是基于对象的。</p>
+<p><code>原型式继承</code></p>
+<p><code>原型链继承</code></p>
+<p><code>经典继承(借用构造函数)</code></p>
+<p><code>组合继承</code></p>
+<h4 id="2-1原型式继承"><a href="#2-1原型式继承" class="headerlink" title="2.1原型式继承"></a>2.1原型式继承</h4><p><strong>原型式继承的方式A</strong></p>
+<pre>
+
+    //01 提供一个构造函数
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    //02 设置原型对象的属性
+    Person.prototype.className = "逍遥派1班";
+
+    //03 使用构造函数来创建原型对象
+    var p1 = new Person("张三",10);
+    var p2 = new Person("李四",20);
+
+    //04 打印p1和p2对象中的className属性
+    console.log(p1.className);
+    console.log(p2.className);
+
+    //结论:对象p1和p2继承了构造函数原型对象中的属性className
+    //但是这并不是严格意义上的继承
+
+</pre>
+
+<p><strong>原型式继承的方式B</strong></p>
+<pre>
+    //01 提供一个构造函数
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    //02 设置原型对象的属性
+    Person.prototype = {
+        constructor:Person,
+        className:"逍遥派1班"
+    };
+
+
+    //03 使用构造函数来创建原型对象
+    var p1 = new Person("张三",10);
+    var p2 = new Person("李四",20);
+
+    //04 打印p1和p2对象中的className属性
+    console.log(p1.className);
+    console.log(p2.className);
+
+    //结论:对象p1和p2继承了构造函数原型对象中的属性className
+    //注意:使用原型替换的方式实现继承的时候,原有原型对象中的属性和方法会丢失
+</pre>
+
+<p><strong>原型式继承的方式C</strong></p>
+<pre>
+    //01 提供超类型|父类型构造函数
+    function SuperClass() {
+        this.name = 'SuperClass的名称';
+        this.showName = function () {
+            console.log(this.name);
+        }
+    }
+
+    //02 设置父类型的原型属性和原型方法
+    SuperClass.prototype.info = 'SuperClass的信息';
+    SuperClass.prototype.showInfo = function () {
+        console.log(this.info);
+    };
+
+    //03 提供子类型
+    function SubClass() {
+    }
+
+    //04 设置继承(原型对象继承)
+    SubClass.prototype = SuperClass.prototype;
+    SubClass.prototype.constructor = SubClass;
+
+    var sub = new SubClass();
+    console.log(sub.name);          //undefined
+    console.log(sub.info);          //SuperClass的信息
+    sub.showInfo();                 //SuperClass的信息
+    sub.showName();                 //sub.showName is not a function
+
+    //点评：上面的方法可以可以继承超类型中的原型属性和原型方法，但是无法继承实例属性和实例方法
+    </pre>
+
+
+<h4 id="2-2原型链继承"><a href="#2-2原型链继承" class="headerlink" title="2.2原型链继承"></a>2.2原型链继承</h4><blockquote>
+<p>实现思想：利用原型（链）让一个对象继承另一个对象的属性和方法  </p>
+</blockquote>
+<p><code>实现本质：重写原型对象</code></p>
+<p><strong>原型链</strong></p>
+<ol>
+<li>每个构造函数都有原型对象</li>
+<li>每个对象都有自己的构造函数</li>
+<li>每个构造函数的原型都是一个对象</li>
+<li>那么这个构造函数的原型对象也有自己的构造函数</li>
+<li><p>那么这个构造函数的原型对象的构造函数也有自己的原型对象  </p>
+<p>以上形成一个链式的结构,称之为原型链</p>
+</li>
+</ol>
+<p><strong>原型链中的属性搜索原则</strong></p>
+<ol>
+<li>当访问某个对象的成员的时候,会先在自身中查找,如果找到则直接使用</li>
+<li>如果在自身中没有找到,则去当前创建当前对象的构造函数的原型对象中查找,如果找到了则直接使用</li>
+<li>如果在该原型对象中没有找到,则继续查找原型对象的原型对象(创建该原型对象的构造函数所对应的原型对象),如果找到则直接使用</li>
+<li>如果在原型对象的原型对象中也没有找到,则继续向上搜索….</li>
+<li>直到Object的原型对象,若还是没有,则返回undefined(属性)或报错(方法)。</li>
+</ol>
+<p><strong>基本写法·代码示例</strong></p>
+<pre><code>//01 提供超类型|父类型
+function SuperClass() {
+    this.name = &apos;SuperClass的名称&apos;;
+    this.showName = function () {
+        console.log(this.name);
+    }
+}
+
+//02 设置父类型的原型属性和原型方法
+SuperClass.prototype.info = &apos;SuperClass的信息&apos;;
+SuperClass.prototype.showInfo = function () {
+    console.log(this.info);
+};
+
+//03 提供子类型
+function SubClass() {
+}
+
+//04 设置继承(原型对象继承)
+SubClass.prototype = new SuperClass();
+SubClass.prototype.constructor = SubClass;
+
+var sub = new SubClass();
+console.log(sub.name);          //SuperClass的名称
+console.log(sub.info);          //SuperClass的信息
+sub.showInfo();                 //SuperClass的信息
+sub.showName();                 //SuperClass的名称
+//点评：可以继承父类型中的原型属性|原型方法,以及实例属性和实例方法
+</code></pre><h4 id="原型链继承的注意点和问题"><a href="#原型链继承的注意点和问题" class="headerlink" title="原型链继承的注意点和问题"></a>原型链继承的注意点和问题</h4><p><strong>注意点</strong></p>
+<ol>
+<li>确定原型和实例的关系 instanceof + isPrototypeOf()</li>
+<li>注意重写原型对象的位置，必须先实现原型继承，然后再设置子对象的原型属性和原型方法</li>
+<li>完成继承之后，不能使用字面量的方式来创建原型[因为会切断原型]</li>
+</ol>
+<p><strong>问题</strong></p>
+<ol>
+<li>父对象的实例属性会转换为子类型原型的原型属性，而如果父类型是实例属性是引用类型则会存在共享问题</li>
+<li><p>在创建子类型的实例时，不能向父类型的构造函数中传递参数</p>
+<pre>
+ //01 提供父对象的构造函数
+ function SuperType() {
+     //02 在构造函数中中设置实例属性,该属性为引用类型
+     this.family = ['哥哥','姐姐','爸爸','妈妈'];
+ };
+
+ //03 提供子对象的构造函数
+ function SubType() {};
+
+ //04 设置原型继承
+ SubType.prototype = new SuperType();
+
+ //05 创建子对象构造函数的实例对象,并对内部的实例化属性进行修改
+ var subDemo1 = new SubType();
+ var subDemo2 = new SubType();
+
+ alert(subDemo1.family);      //哥哥,姐姐,爸爸,妈妈
+ alert(subDemo2.family);      //哥哥,姐姐,爸爸,妈妈
+
+ subDemo1.family.push('爷爷','奶奶');
+ alert(subDemo1.family);    //哥哥,姐姐,爸爸,妈妈,爷爷,奶奶
+ alert(subDemo2.family);    //哥哥,姐姐,爸爸,妈妈,爷爷,奶奶
+</pre>
+
+
+
+</li>
+</ol>
+<h4 id="2-3经典继承（借用构造函数）"><a href="#2-3经典继承（借用构造函数）" class="headerlink" title="2.3经典继承（借用构造函数）"></a>2.3经典继承（借用构造函数）</h4><blockquote>
+<p>经典继承又称为借用构造函数|伪造继承</p>
+</blockquote>
+<p><strong>基本思想</strong></p>
+<p><code>在子类型构造函数的内部调用超类型|父类型构造函数</code></p>
+<p><code>说明：需要借助call||apply方法</code></p>
+<p>代码示例:</p>
+<p><pre><br>  //01 提供父类型(对象)的构造函数<br>    function SuperType(name) {<br>        //02 在构造函数中中设置实例属性,该属性为引用类型<br>        this.family = [‘哥哥’,’姐姐’,’爸爸’,’妈妈’];<br>        //实例属性<br>        this.name = name;<br>    };<br>    SuperType.prototype.info = ‘父类型的原型属性’;</pre></p>
+<pre><code>//03 提供子类型（对象）的构造函数
+function SubType() {
+    //经典继承|借用构造函数|伪造对象继承
+    //SuperType.call(this);
+
+    //构造参数传递参数
+    SuperType.call(this,&apos;张老汉&apos;);
+};
+
+//04 创建父类型的实例对象,并对内部的实例化属性进行修改
+var subDemo1 = new SubType();
+var subDemo2 = new SubType();
+
+alert(subDemo1.info);        //undefined
+alert(subDemo1.family);      //哥哥,姐姐,爸爸,妈妈
+alert(subDemo2.family);      //哥哥,姐姐,爸爸,妈妈
+
+subDemo1.family.push(&apos;爷爷&apos;,&apos;奶奶&apos;);
+alert(subDemo1.family);    //哥哥,姐姐,爸爸,妈妈,爷爷,奶奶
+alert(subDemo2.family);    //哥哥,姐姐,爸爸,妈妈
+
+//测试构造函数传递参数
+alert(subDemo1.name);
+//点评：能够继承父类型的实例属性,但是无法继承父类型的原型属性和原型方法
+</code></pre><p> <br><strong>经典继承的优点</strong></p>
+<ol>
+<li>解决实例对象共享问题，通过调用父对象的构造函数来实现每个子类型（对象）的实例对象均拥有一份父类型实例属性和方法的副本  </li>
+<li>可以在调用call方法的时候向构造函数传递参数</li>
+</ol>
+<p><strong>经典继承的问题</strong></p>
+<ol>
+<li>冒充继承的方法无法实现函数的重用</li>
+<li>无法继承父对象的原型属性和原型方法</li>
+</ol>
+<h4 id="2-4组合继承"><a href="#2-4组合继承" class="headerlink" title="2.4组合继承"></a>2.4组合继承</h4><blockquote>
+<p>组合继承|伪经典继承</p>
+</blockquote>
+<p><strong>基本思想</strong></p>
+<ol>
+<li>使用原型链实现对原型属性和方法的继承</li>
+<li>通过伪造(冒充)构造函数来实现对实例属性的继承</li>
+</ol>
+<p>代码示例</p>
+<pre><code>//01 提供父类型的构造函数
+function SuperType(name) {
+    //在构造函数中中设置实例属性,该属性为引用类型
+    this.family = [&apos;哥哥&apos;,&apos;姐姐&apos;,&apos;爸爸&apos;,&apos;妈妈&apos;];
+    //实例属性
+    this.name = name;
+};
+
+//原型方法
+SuperType.prototype.showName = function () {
+    console.log(this.name);
+}
+
+//02 提供子类型的构造函数
+function SubType(name) {
+    //冒充|伪造 构造参数传递参数
+    SuperType.call(this,name);
+};
+
+SubType.prototype = SuperType.prototype;
+//SubType.prototype = new SuperType();
+
+//02 创建父类型的实例对象,并对内部的实例化属性进行修改
+var subDemo1 = new SubType(&apos;张三&apos;);
+var subDemo2 = new SubType(&apos;张四&apos;);
+
+alert(subDemo1.family);    //哥哥,姐姐,爸爸,妈妈
+alert(subDemo2.family);      //哥哥,姐姐,爸爸,妈妈
+
+subDemo1.family.push(&apos;爷爷&apos;,&apos;奶奶&apos;);
+alert(subDemo1.family);    //哥哥,姐姐,爸爸,妈妈,爷爷,奶奶
+alert(subDemo2.family);    //哥哥,姐姐,爸爸,妈妈
+
+//测试构造函数传递参数
+subDemo1.showName();    //张三
+subDemo2.showName();    //张四
+</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
