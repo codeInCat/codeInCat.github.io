@@ -101,7 +101,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2016-04-12</span>
-            <span class="time">13:01:56</span>
+            <span class="time">13:09:07</span>
           </span>
           
           <!--  Categories  -->
@@ -123,31 +123,125 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="关于对象几个常见的属性和方法"><a href="#关于对象几个常见的属性和方法" class="headerlink" title="关于对象几个常见的属性和方法"></a>关于对象几个常见的属性和方法</h1><h4 id="2-in关键字"><a href="#2-in关键字" class="headerlink" title="2.in关键字"></a>2.in关键字</h4><p>作用：用来检查对象中是否存在某个属性(不区分实例属性和原型属性)</p>
+          <h1 id="关于对象几个常见的属性和方法"><a href="#关于对象几个常见的属性和方法" class="headerlink" title="关于对象几个常见的属性和方法"></a>关于对象几个常见的属性和方法</h1><h4 id="1-in关键字"><a href="#1-in关键字" class="headerlink" title="1.in关键字"></a>1.in关键字</h4><p>作用：用来检查对象中是否存在某个属性(不区分实例属性和原型属性)</p>
 <p><code>语法：“属性名” in 对象</code></p>
 <p>代码示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">    //01 提供一个构造函数</div><div class="line">    function Person(name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //02 设置构造函数的原型对象的属性</div><div class="line">    Person.prototype.sayHello = function () &#123;</div><div class="line">        console.log(&quot;hello&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //03 创建对象</div><div class="line">    var p1 = new Person();</div><div class="line"></div><div class="line">    //04 使用in关键字判断对象中是否存在以下属性:name age sayHello</div><div class="line">    console.log(&quot;age&quot; in p1);       //false</div><div class="line">    console.log(&quot;name&quot; in p1);      //true</div><div class="line">    console.log(&quot;sayHello&quot; in p1);  //true</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<pre>
+    //01 提供一个构造函数
+    function Person(name) {
+        this.name = name;
+    }
+
+    //02 设置构造函数的原型对象的属性
+    Person.prototype.sayHello = function () {
+        console.log("hello");
+    }
+
+    //03 创建对象
+    var p1 = new Person();
+
+    //04 使用in关键字判断对象中是否存在以下属性:name age sayHello
+    console.log("age" in p1);       //false
+    console.log("name" in p1);      //true
+    console.log("sayHello" in p1);  //true
+
+</pre>
+
+
 <h4 id="2-hasOwnProperty方法"><a href="#2-hasOwnProperty方法" class="headerlink" title="2.hasOwnProperty方法"></a>2.hasOwnProperty方法</h4><p>作用：用来检查对象中是否存在指定的属性(只检查实例属性)</p>
 <p><code>语法：对象.hasOwnProperty(“属性名”)</code></p>
 <p>代码示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">    //01 提供一个构造函数</div><div class="line">    function Person(name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //02 设置构造函数的原型对象的属性</div><div class="line">    Person.prototype.sayHello = function () &#123;</div><div class="line">        console.log(&quot;hello&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Person.prototype.des = &quot;默认的描述信息&quot;;</div><div class="line"></div><div class="line">    //03 创建对象</div><div class="line">    var p1 = new Person();</div><div class="line"></div><div class="line">    //04 使用hasOwnProperty方法判断该属性是否是对象的实例属性</div><div class="line">    console.log(p1.hasOwnProperty(&quot;age&quot;));       //false</div><div class="line">    console.log(p1.hasOwnProperty(&quot;name&quot;));      //true</div><div class="line">    console.log(p1.hasOwnProperty(&quot;sayHello&quot;));  //false</div><div class="line">    console.log(p1.hasOwnProperty(&quot;des&quot;));       //false</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<pre>
+    //01 提供一个构造函数
+    function Person(name) {
+        this.name = name;
+    }
+
+    //02 设置构造函数的原型对象的属性
+    Person.prototype.sayHello = function () {
+        console.log("hello");
+    }
+
+    Person.prototype.des = "默认的描述信息";
+
+    //03 创建对象
+    var p1 = new Person();
+
+    //04 使用hasOwnProperty方法判断该属性是否是对象的实例属性
+    console.log(p1.hasOwnProperty("age"));       //false
+    console.log(p1.hasOwnProperty("name"));      //true
+    console.log(p1.hasOwnProperty("sayHello"));  //false
+    console.log(p1.hasOwnProperty("des"));       //false
+</pre>
+
 <p><em>判断某对象中存在且只存在某个原型属性</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function isProperty(obj, property) &#123;</div><div class="line">       return !obj.hasOwnProperty(property) &amp;&amp; (property in obj);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<pre>
+ function isProperty(obj, property) {
+        return !obj.hasOwnProperty(property) && (property in obj);
+    }
+</pre>
+
 <h4 id="constructor构造器属性"><a href="#constructor构造器属性" class="headerlink" title="constructor构造器属性"></a>constructor构造器属性</h4><p><strong>说明</strong></p>
 <p>  使用构造函数创建对象,则</p>
 <pre><code>原型对象中的constructor属性指向对应的构造函数
 实例对象中的constructor指向对应的构造函数,其中这里的constructor就是从原型中获取的,即constructor是实例对象中的原型属性,而非实例属性
 </code></pre><p><strong>代码验证</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//01 提供一个构造函数</div><div class="line">   function Person(name) &#123;</div><div class="line">       this.name = name;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   //02 设置构造函数的原型对象的属性</div><div class="line">   Person.prototype.sayHello = function () &#123;</div><div class="line">       console.log(&quot;hello&quot;);</div><div class="line">   &#125;;</div><div class="line"></div><div class="line">   Person.prototype.des = &quot;默认的描述信息&quot;;</div><div class="line"></div><div class="line">   //03 创建对象</div><div class="line">   var p1 = new Person();</div><div class="line"></div><div class="line"></div><div class="line">   function isProperty(obj, property) &#123;</div><div class="line">       return !obj.hasOwnProperty(property) &amp;&amp; (property in obj);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   console.log(isProperty(p1, &quot;constructor&quot;));    //true</div></pre></td></tr></table></figure>
+<pre>
+ //01 提供一个构造函数
+    function Person(name) {
+        this.name = name;
+    }
+
+    //02 设置构造函数的原型对象的属性
+    Person.prototype.sayHello = function () {
+        console.log("hello");
+    };
+
+    Person.prototype.des = "默认的描述信息";
+
+    //03 创建对象
+    var p1 = new Person();
+
+
+    function isProperty(obj, property) {
+        return !obj.hasOwnProperty(property) && (property in obj);
+    }
+
+    console.log(isProperty(p1, "constructor"));    //true
+</pre>
+
 <h4 id="4-isprotoTypeOf-方法"><a href="#4-isprotoTypeOf-方法" class="headerlink" title="4.isprotoTypeOf 方法"></a>4.isprotoTypeOf 方法</h4><p>作用：判断是否是某个实例对象的原型对象</p>
 <p><code>语法:构造函数.protoType.isPrototypeOf(实例对象)</code></p>
 <p>用法示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">    function Person() &#123;</div><div class="line">    &#125;</div><div class="line">    function Dog() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Person.prototype.name = &quot;嘿嘿&quot;;</div><div class="line">    var p1 = new Person();</div><div class="line"></div><div class="line">    console.log(Person.prototype.isPrototypeOf(p1));    //rue</div><div class="line">    console.log(Object.prototype.isPrototypeOf(p1));    //true</div><div class="line">    console.log(Dog.prototype.isPrototypeOf(p1));       //false</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<pre>
+    function Person() {
+    }
+    function Dog() {
+    }
+
+    Person.prototype.name = "嘿嘿";
+    var p1 = new Person();
+
+    console.log(Person.prototype.isPrototypeOf(p1));    //rue
+    console.log(Object.prototype.isPrototypeOf(p1));    //true
+    console.log(Dog.prototype.isPrototypeOf(p1));       //false
+</pre>
+
 <h4 id="5-instanceof-方法"><a href="#5-instanceof-方法" class="headerlink" title="5.instanceof 方法"></a>5.instanceof 方法</h4><p>作用：用于检查对象是否是某个构造函数(类型)的实例</p>
 <p><code>语法：对象 instance 构造函数</code></p>
 <p><code>注意：所有的对象都是Object构造函数（类型）的实例</code></p>
 <p>用法示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">    var arr = [1,2,3];</div><div class="line">    console.log(arr instanceof Array);      //true</div><div class="line">    console.log(Array instanceof Object);   //true</div><div class="line">    console.log(arr instanceof Object);     //true</div><div class="line"></div><div class="line">    //instanceOf在判断的时候,算上整条原型链</div><div class="line">    //arr 是Array 和Object 任何一个类的示例</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<pre>
+    var arr = [1,2,3];
+    console.log(arr instanceof Array);      //true
+    console.log(Array instanceof Object);   //true
+    console.log(arr instanceof Object);     //true
+
+    //instanceOf在判断的时候,算上整条原型链
+    //arr 是Array 和Object 任何一个类的示例
+</pre>
+
+
 
         </div>
       </div>
