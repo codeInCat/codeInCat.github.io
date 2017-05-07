@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
+  <meta name="description" content="对象的动态特性">
   <meta name="author" content="刘鑫磊">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="JS中事件的target和currentTarget的区别"/>
-  <meta property="og:description" content="" />
+  <meta property="og:title" content="JS中对象的动态特性"/>
+  <meta property="og:description" content="对象的动态特性" />
   <meta property="og:site_name" content="小猫的前端学习日记"/>
   <meta property="og:type" content="article" />
   <meta property="og:image" content="http://yoursite.comundefined"/>
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">JS中事件的target和currentTarget的区别</p>
+          <p class="title">JS中对象的动态特性</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -100,7 +100,7 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2015-11-08</span>
+            <span class="date">2017-03-24</span>
             <span class="time">10:27:40</span>
           </span>
           
@@ -116,18 +116,66 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/事件/">#事件</a>
+<a class="tag" href="/tags/对象/">#对象</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="JS中事件的target和currentTarget"><a href="#JS中事件的target和currentTarget" class="headerlink" title="JS中事件的target和currentTarget"></a>JS中事件的target和currentTarget</h1><p>在JavaScript的event对象中:<br>event.target指代的是触发事件的元素<br>event.currentTarget指代的是事件绑定的元素<br>对象this始终等于currentTarget的值</p>
-<p>详见如下demo:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">function getEventTrigger(event)</div><div class="line">  &#123; </div><div class="line">  x=event.currentTarget; </div><div class="line">  y=event.target;</div><div class="line">  alert(&quot;该事件绑定的元素的id是: &quot;+ x.id +&quot;该事件触发的元素的id是: &quot;+ y.id);</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body &gt;</div><div class="line">&lt;p id=&quot;p1&quot; onmousedown=&quot;getEventTrigger(event)&quot;&gt;</div><div class="line">	点我你试试 &lt;span id=&quot;s1&quot;&gt;试试就试试&lt;/span&gt;&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>点击 <strong>点我你试试</strong> 时弹框输出:<br>    该事件绑定的元素的id是:p1该事件触发的元素的id是:p1<br>点击 <strong>试试就试试</strong> 时弹框输出:<br>    该事件绑定的元素的id是:p1该事件触发的元素的id是:s1  </p>
-<p>由此可见:    target指代的是触发事件的元素,currentTarget指代的是事件绑定的元素 </p>
+          <h1 id="对象的动态特性"><a href="#对象的动态特性" class="headerlink" title="对象的动态特性"></a>对象的动态特性</h1><p><em>在js中可以动态的对对象属性进行增加、修改和删除</em></p>
+<p><strong>代码示例</strong></p>
+<pre>
+    //01 创建对象
+    var obj = {
+        name:"刘德华",
+        age:60
+    };
+    //02 动态的为对象添加属性
+    obj.height = "180cm";
+        console.log(obj.height);
+    //03 动态的为对象添加方法
+    obj.maiMeng = function () {
+        console.log("华仔会卖萌噢");
+    };
+    obj.maiMeng();
+    //04 修改属性的值:如果设置的属性以前不存在,那么就是添加,如果设置的属性已经存在了,那么就是修改
+    obj.name = "王宝强";
+    console.log(obj.name)
+    //05 删除属性
+    delete obj.name;
+    console.log(obj.name);  //undefined 
+</pre> 
+
+<p><strong>访问对象的方法</strong><br>01 可以使用点语法访问<br>02 可以使用[]语法访问，注意对象的属性必须是字符串</p>
+<h4 id="关键字in和delete的使用"><a href="#关键字in和delete的使用" class="headerlink" title="关键字in和delete的使用"></a>关键字in和delete的使用</h4><p><strong>01 in关键字</strong></p>
+<p>01 判断属性是否存在于对象中，注意所有的key都是字符串</p>
+<p>02 for in循环中遍历对象的键</p>
+<p><strong>代码示例</strong></p>
+<pre><code>var obj = {
+    name:&quot;张三&quot;,
+    age:18
+};
+
+for(k in obj)
+{
+    console.log(k,obj[k]);
+}
+
+//检测obj对象中是否存在name这个属性
+console.log(&quot;name&quot; in obj);
+</code></pre><p><strong>注意</strong>：<code>in关键字操作数组的时候检测的是索引值并非数组元素</code></p>
+<p><strong>02 delete关键字</strong></p>
+<ol>
+<li>删除对象的属性</li>
+<li>删除未使用var声明的变量</li>
+<li>返回值为boolean类型，true则 表示是否删除成功</li>
+</ol>
+<p><strong>注意</strong>  </p>
+<ol>
+<li>删除的属性如果不存在，返回true  </li>
+<li>删除的如果是原型中的属性，返回true 但是删除不成功</li>
+</ol>
 
         </div>
       </div>
