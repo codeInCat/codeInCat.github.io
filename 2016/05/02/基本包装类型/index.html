@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="基本包装类型">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="基本包装类型"/>
+  <meta property="og:description" content="基本包装类型" />
+  <meta property="og:site_name" content="小猫的前端学习日记"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的前端学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的前端学习日记</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">基本包装类型</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2016-05-02</span>
+            <span class="time">14:20:37</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/JavaScript/">JavaScript</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/对象/">#对象</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="基本包装类型"><a href="#基本包装类型" class="headerlink" title="基本包装类型"></a>基本包装类型</h1><p><strong>基本类型</strong>：字符串 + 数值 + null + undefined + 布尔值</p>
+<p>为了便于操作基本类型，ECMAScript提供了三个特殊的引用类型：<code>Boolean + Number + String</code>。</p>
+<p>上述类型和其他的引用类型类似，同时也具备与各自的基本类型相应的特殊行为，每当我们读取一个基本类型的值的时候，后台就会创建一个对应的基本包装类型对象，从而让我们能够调用一些方法来操作这些数据。</p>
+<pre><code>var str = &apos;测试字符串&apos;;
+console.log(str.length);            //5
+console.log(str.substring(2));      //字符串
+</code></pre><p><code>思考</code>：属性和方法本是对象的特征，字符串如何能够拥有length属性以及其他类似subString等方法，内部怎么实现的？</p>
+<p>基本类型值并不是对象，因此从逻辑上讨论他们不应该有属性和方法。 内部的具体处理如下:</p>
+<ol>
+<li>创建String类型的一个实例对象</li>
+<li>在实例对象上面读取指定的属性（length）,调用指定的方法（subString）</li>
+<li>销毁该对象</li>
+</ol>
+<p><strong>Number</strong></p>
+<p>Number是与数字值相对应的引用类型。</p>
+<p>创建Number类型的对象：var num = new Number(10);</p>
+<p><strong>String</strong></p>
+<p>String是字符串的对象包装类型。</p>
+<p>创建字符串类型的对象：var str = new String(‘hello World’);</p>
+<p><strong>Boolean</strong></p>
+<p>Boolean是与布尔值对象的引用类型。</p>
+<p>可以通过调用Boolean构造函数传递参数来创建boolean类型的对象。</p>
+<p>var bool = new Boolean(true);</p>
+<p><strong>基本包装类型的代码示例</strong></p>
+<pre><code>//001 String
+var str = &apos;测试字符串&apos;;
+console.log(str.length);            //5
+console.log(str.substring(2));      //字符串
+
+//002 Number
+var num = new Number(10);
+console.log(num);                   //Number {[[PrimitiveValue]]: 10}
+console.log(typeof num);            //object
+console.log(typeof 10);             //number
+
+//003 Boolean
+var bool = new Boolean(true);
+console.log(bool);                  //Boolean {[[PrimitiveValue]]: true}
+console.log(typeof bool);           //object
+console.log(typeof true);           //boolean
+</code></pre><p><strong>基本包装类型的注意点</strong></p>
+<p><code>[1] 对象还是基本数据类型值？</code></p>
+<p>对象：通过new 调用构造函数创建出来的是对象</p>
+<p>基本数据类型值：直接通过字面量方式赋值|通过省略new关键字调用构造函数方式创建的是基本数据类型值。</p>
+<pre>
+ex:
+    var str1 = new String('hello');
+    var str2 = 'hello';
+    var str3 = String('hello');
+    说明：以上代码中，str1是对象，而str2和str3是字符串（基本数据类型值）
+</pre>
+
+<p><code>[2] 相等问题</code></p>
+<p><code>基本类型值判断相等=&gt;值相等</code></p>
+<p><code>引用类型值判断相等=&gt;值相等且引用相等</code></p>
+<p>对象是引用类型，因此在判断相等的时候有诸多的注意点和容易出错的地方</p>
+<pre>
+ex
+    var str1 = '这是一个字符串';           //基本数据类型
+    var str2 = String('这是一个字符串');   //基本数据类型
+    console.log(str1 == str2);        //true 相等
+
+
+    var str3 = new String('这是一个字符串');  //引用类型-对象
+    console.log(str1 == str3);    //true    //值相等
+    console.log(str2 == str3);    //true    //值相等
+
+    console.log(str1 === str3);    //false  //值相等,但是引用不相等
+    console.log(str2 === str3);    //false  //值相等,但是引用不相等
+
+
+    //判断下面的变量是否相等
+    var num1 = 10;                  //基本数据类型
+    var num2 = new Number(10);      //对象
+    console.log(num1 == num2);      //true
+    console.log(num1 ===  num2);    //false
+
+    var bool1 = true;
+    var bool2 = new Boolean(true);
+    console.log(bool1 == bool2);    //true
+    console.log(bool1 === bool2);   //false
+</pre>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
