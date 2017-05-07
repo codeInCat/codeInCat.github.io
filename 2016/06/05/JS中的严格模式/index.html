@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="严格模式的注意事项">
+  <meta name="author" content="刘鑫磊">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="JS中的严格模式"/>
+  <meta property="og:description" content="严格模式的注意事项" />
+  <meta property="og:site_name" content="小猫的前端学习日记"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.comundefined"/>
+  
+    <link rel="alternate" href="/atom.xml" title="小猫的前端学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>小猫的前端学习日记</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">JS中的严格模式</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/codeInCat">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:18745764313@163.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By 刘鑫磊</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2016-06-05</span>
+            <span class="time">22:01:30</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/JavaScript/">JavaScript</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/严格模式/">#严格模式</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <blockquote>
+<p>js中有严格模式和非严格模式两种运行环境</p>
+</blockquote>
+<p><strong>严格模式关键字</strong></p>
+<p><code>关键字 “use strict”;</code></p>
+<p><strong>实现严格模式</strong>:只需要在脚本代码中添加上上述关键字即可。 关键字具体说明</p>
+<ol>
+<li>注意区分大小写，必须全部都是小写的</li>
+<li>注意空格，整个字符串总共10个字符</li>
+<li>单引号和双引号无所谓，但是需要有双引号</li>
+<li>必须写在作用域的最顶部，注意其位置</li>
+<li>可以加分号，也可以不加，但是必须是一个字符串</li>
+</ol>
+<p><strong>作用范围</strong></p>
+<p>① 函数的顶部(只对当前的函数有效)</p>
+<p>② script标签的顶部,只对当前的标签有效,对页面中其他的script无效</p>
+<p>代码示例</p>
+<pre>
+    //位置01       对func01和func02都有效
+    //"use strict";
+    function func01() {
+        //位置02   对func01有效,对func02无效
+        //"use strict";
+        a = 10;
+        console.log(a);
+    }
+    function func02() {
+        //位置03 对func02有效,但对func01无效
+       //"use strict";
+        b = 20;
+        console.log(b);
+    }
+    func01();
+    func02();
+</pre>
+
+
+<h3 id="严格模式使用注意"><a href="#严格模式使用注意" class="headerlink" title="严格模式使用注意"></a>严格模式使用注意</h3><ol>
+<li>所有的变量必须使用var关键字声明</li>
+<li>不能使用delete关键字删除全局变量 ,以前默认删除失败,严格模式下直接报错</li>
+<li>在对象中不允许有同名的属性</li>
+<li>函数的参数必须唯一(不能出现同名的参数)</li>
+<li>arguments对象的行为不同,在非严格模式下修改形参的值会反映到arguments中,而严格模式下则相对独立</li>
+<li>禁用了argument.callee和caller函数,他们一个引用函数本身,一个引用调用函数</li>
+<li>不能在if语句中声明函数</li>
+<li>禁止使用eval和argument作为标识符</li>
+<li>修正this的值,在严格模式下,函数this的值始终是指定的值,无论指定的是什么值。</li>
+<li>禁用了with语句</li>
+<li>去掉了JavaScript中的八进制字面量(以0开头的八进制字面量是无效的语法)</li>
+</ol>
+<p><strong>① 所有的变量都必须使用var关键字声明</strong></p>
+<pre>
+a = 10;             //错误的演示
+console.log(10);
+</pre>
+
+<p><strong>② 不能使用delete关键字删除全局变量</strong></p>
+<pre>
+    //在非严格模式下,删除失败(静默失败)   失败了不吭声,严格模式下直接报错
+    var a = 10;
+    delete a;
+    console.log(a);
+</pre>
+
+<p><strong>③ 在对象中不允许有同名的属性</strong></p>
+<pre>
+    //在非严格模式下,会使用后面的属性赋值作为最终值,在严格模式下则直接报错
+    var obj = {
+        name:"张三",
+        name:"李四"
+    }
+    console.log(obj);
+</pre>
+
+<p><strong>④ 函数的参数必须唯一(不能出现同名的参数)</strong></p>
+<pre>
+    //在非严格模式下,如果函数在定义的时候,使用了多个同名的参数,则在函数内部形参的实际值为最后一个传入的实参值
+    //在严格模式下,直接报错
+    //    function func(a,a,a) {
+    //        console.log(a);
+    //        console.log(arguments);
+    //    }
+    function func(a,b,c) {
+        console.log(a);
+        console.log(arguments);
+    }
+    func(1,2,3);
+</pre>
+**arguments对象的行为不同**
+
+说明：
+
+（1）严格模式下,在函数内部修改了对象的指向,对arguments的值不会产生影响
+
+（2）在严格模式下,形参的值和arguments的值是相互独立的,在函数内部修改了形参的值对arguments不受影响
+
+（3）在非严格模式下，修改了形参的值，arguments中的数据会跟着改变
+
+<pre>
+    //测试引用类型的值作为函数的参数
+ function funcName(obj) {
+        console.log(obj);
+        console.log(arguments[0]);
+
+        //在函数内部修改形参的值
+        obj = {age:20};
+        console.log(obj);
+        console.log(arguments[0]);
+    }
+
+    funcName({name:"张三"});
+    //测试基本类型数据作为函数的参数
+    function fun(str) {
+        console.log(str);
+        console.log(arguments[0]);
+        str = "hello";
+        console.log(arguments[0]);
+    }
+
+    fun("hi");
+</pre>
+
+<p><strong>⑥ 禁用了argument.callee和caller函数</strong></p>
+<p>说明：</p>
+<p><code>argument.callee是对函数自身的引用</code><br><code>argument.calller是对调用函数的引用</code></p>
+<pre>
+    var num = (function (n) {
+            if (n ==1)
+            {
+                return 1;
+            }
+
+            return arguments.callee(n-1) + n;
+        })(10);
+
+        console.log(num);       //55
+</pre>
+
+<p><strong>⑦ 不能在if语句中声明函数</strong></p>
+<pre>
+//如果在if语句中声明函数，则会产生语法错误
+  if (true)
+    {
+        console.log("________");
+        function demo() {
+            console.log("呵呵呵呵");
+        }
+
+        demo();
+    }
+</pre>
+
+<p><strong>⑧ 禁止使用eval和argument作为标识符</strong></p>
+<pre>
+    var eval = "测试的字符串";
+    console.log(eval);
+
+    var arguments = "参数列表";
+    console.log(arguments);
+</pre>
+
+<p><strong>⑨ 修正this的值</strong></p>
+<pre>
+    在严格模式下,函数this的值始终是指定的值,无论指定的是什么值
+    var name = "测试的name";
+    function demoTest() {
+
+        //在非严格模式下,打印出来的this为全局的对象window
+        console.log(this);  //在严格模式下打印出来的this为undefined
+    }
+    demoTest();
+</pre>
+
+<p><strong>⑩ 禁用了with语句</strong></p>
+<pre>
+  var o = {name:"暂时干",age:20};
+    with(o)
+    {
+        name = "lisi";
+        age = 48
+    }
+    console.log(o);
+</pre>
+
+<p><strong>11 禁用了八进制</strong></p>
+<pre>
+    //以0开头的数据常常引起混乱
+    //var num = 023;     //2*8 + 3 ==> 19
+    //console.log(num); //19
+</pre>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
