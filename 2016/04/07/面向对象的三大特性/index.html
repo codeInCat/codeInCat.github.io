@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="this的几种用法">
+  <meta name="description" content="面向对象学习笔记">
   <meta name="author" content="刘鑫磊">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="js中this的用法"/>
-  <meta property="og:description" content="this的几种用法" />
+  <meta property="og:title" content="面向对象的三大特性"/>
+  <meta property="og:description" content="面向对象学习笔记" />
   <meta property="og:site_name" content="小猫的前端学习日记"/>
   <meta property="og:type" content="article" />
   <meta property="og:image" content="http://yoursite.comundefined"/>
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">js中this的用法</p>
+          <p class="title">面向对象的三大特性</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -100,7 +100,7 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2015-10-14</span>
+            <span class="date">2016-04-07</span>
             <span class="time">12:04:34</span>
           </span>
           
@@ -116,71 +116,74 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/this/">#this</a>
+<a class="tag" href="/tags/面向对象/">#面向对象</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="this的几种用法"><a href="#this的几种用法" class="headerlink" title="this的几种用法"></a>this的几种用法</h1><p>this是JavaScript语言的一个关键字。随着函数使用场合的不同，this的值会发生变化。JavaScript中的this指针是一个动态的变量，一个方法内的this指针并不是始终指向定义该方法的对象的。</p>
-<p>this关键字虽然会根据环境变化，但是它始终代表的是调用当前函数的那个对象。这就引出了JS中函数调用的问题。在JS中调用函数的模式可以分为4种： 方法调用模式、函数调用模式、构造器调用模式、apply调用模式。</p>
-<h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><p>当函数被当做某个对象的方法调用时,此时函数内部的this指向调用他的对象; </p>
+          <h1 id="面向对象的三大特性"><a href="#面向对象的三大特性" class="headerlink" title="面向对象的三大特性"></a>面向对象的三大特性</h1><blockquote>
+<p>面向对象的三大特性:封装、继承、多态</p>
+</blockquote>
+<p><strong>封装</strong></p>
+<pre><code>复用|信息隐蔽
+</code></pre><p>代码示例</p>
 <pre>
-    function sayName(){
-        alert(this.name);
-    }
-    var name = 'window';
-    var obj = {
-        name: 'obj',
-        sayName: sayName
-    }
-    obj.sayName();//obj
-</pre>
+    //01 封装的简单说明
+    //001 观察以下杂乱无关的语句,它们仅仅只是一堆无意义的全局变量
+    var name = "我的特工爷爷";
+    var actors = ["洪金宝","刘德华"];
+    var showTime = "2016-3-28 - 2016-4-28";
+    var director = "洪金宝";
+    var type = "喜剧";
+    var play = function () {
+        //播放......
+    };
 
-
-<h3 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h3><p>当函数以该模式调用时,this指向的是window对象;</p>
-<pre>
-    function sayName(){
-        alert(this.name);
-    }
-    var name = 'window';
-    var obj = {
-        name: 'obj',
-        sayName: sayName
-    }
-    sayName();//window
-</pre>
-
-
-<h3 id="构造函数调用模式"><a href="#构造函数调用模式" class="headerlink" title="构造函数调用模式"></a>构造函数调用模式</h3><p>如果在一个函数前面加上new关键字来调用，那么就会创建一个连接到该函数的prototype成员的新对象，同时，this会被绑定到这个新对象上。即this指向该构造函数的实例对象;</p>
-<pre>
-    function Dog(name,age){
-        this.name = name,
-        this.age = age, 
-        this.sayName = function(){
-            alert(this.name)
+    //002 把上面的变量封装到对象中(更具体&有意义)
+    var film  = {
+        name:"我的特工爷爷",
+        actors:["洪金宝","刘德华"],
+        showTime:"2016-3-28 - 2016-4-28",
+        director:"洪金宝",
+        type:"喜剧",
+        play:function () {
+        //播放......
         }
     }
-    var xiaobai = new Dog('xiaobai',2);
-    xiaobai.sayName();//xiaobai
 </pre>
 
-
-<h3 id="apply-call调用模式"><a href="#apply-call调用模式" class="headerlink" title="apply/call调用模式"></a>apply/call调用模式</h3><p>所有函数对象都有两个方法：apply和call，这两个方法可以让我们构建一个参数数组传递给调用函数，也允许我们改变this的值。<br><strong>注意:非严格模式下,apply未传参或第一个参数是null或undefined时,this指向的是window</strong></p>
+<p><strong>继承</strong></p>
+<pre><code>获取已经存在的对象已有属性和方法的一种方式(获取他人已有财富和资源的一种方式)。
+</code></pre><p>代码示例</p>
 <pre>
-    var name = "window";
-    var person = {
-        name: "xiaobai"
-    };
-    function sayName() {
-          console.log(this.name);
+    //继承的简单示例
+    //001 创建一个空的对象
+    var nullObj = {};
+
+    // 上面的对象film拥有了很多的属性和方法
+    //002 设法让nullObj拥有film中所有的属性和方法
+    //方法一:自己重新写一遍
+    //方法二:通过某种方式来获得,比如遍历该对象,然后完成赋值
+    for(var k in film)
+    {
+        nullObj[k] = film[k];
     }
-    sayName();    //window
-    sayName.apply(person);   //xiaobai
-    sayName.apply();    //window
+
+    for(var k in nullObj)
+    {
+        console.log(nullObj[k]);
+    }
 </pre>
 
+<p><strong>多态(polymorphism)</strong></p>
+<pre><code>多态:polymorphism = poly(复数) + morph(形态) + ism
+多用于强类型语言中,JavaScript具备与生俱来的多态特性。
+多态表现为:
+    ① 同一操作,作用于不同的对象,会产生不同的解释和行为。
+    ② 隐藏不同。
+</code></pre>
         </div>
       </div>
     </div>
