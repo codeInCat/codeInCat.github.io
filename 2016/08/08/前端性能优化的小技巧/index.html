@@ -101,7 +101,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2016-08-08</span>
-            <span class="time">09:22:12</span>
+            <span class="time">10:57:50</span>
           </span>
           
           <!--  Categories  -->
@@ -191,36 +191,10 @@ Content-Type: text/html
 <h4 id="2-3Gzip压缩传输文件"><a href="#2-3Gzip压缩传输文件" class="headerlink" title="2.3Gzip压缩传输文件"></a>2.3Gzip压缩传输文件</h4><p>Gzip通常可以减少70%网页内容的大小，包括脚本、样式表、图片等文件。Gzip比deflate更高效，主流服务器都有相应的压缩支持模块。</p>
 <p>IIS中内建了静态压缩和动态压缩模块，如何配制可以参考<a href="http://technet.microsoft.com/en-us/library/cc754668%28v=WS.10%29.aspx" target="_blank" rel="external">Enable HTTP Compression of Static Content (IIS 7)</a>和<a href="http://technet.microsoft.com/en-us/library/cc753681%28v=WS.10%29.aspx" target="_blank" rel="external">Enable HTTP Compression of Dynamic Content (IIS 7)</a>。</p>
 <p>值得注意的是pdf文件可以从需要被压缩的类型中剔除，因为pdf文件本身已经压缩，gzip对其效果不大，而且会浪费CPU。</p>
-<p>####2.4配置ETags<br>虽然标题叫配制ETags，但是这里你要根据具体情况进行一些判断。首先Etag简单来说是通过一个文件版本标识使得服务器可以轻松判断该请求的内容是否有所更新，如果没有就回复304 (not modified)，从而避免下载整个文件。</p>
+<h4 id="2-4配置ETags"><a href="#2-4配置ETags" class="headerlink" title="2.4配置ETags"></a>2.4配置ETags</h4><p>虽然标题叫配制ETags，但是这里你要根据具体情况进行一些判断。首先Etag简单来说是通过一个文件版本标识使得服务器可以轻松判断该请求的内容是否有所更新，如果没有就回复304 (not modified)，从而避免下载整个文件。</p>
 <p>但是Etags的版本信息即使主流服务器未能很好地支持跨服务器的判断，比如你从一个服务器集群中一台得到Etags，然后发送到了另一台那么校验很有可能会失败。</p>
-<p>如果你遇到这样的问题，IIS 7中可以通过如下方法将Etag去掉，使用URL Rewrite，然后在web.config中添加如下配制</p>
-<pre>
-\<rewrite>
-   \<outboundrules>
-     \<rule name="Remove ETag">
-         \<match servervariable="RESPONSE_ETag" pattern=".+">
-         \<action type="Rewrite" value="">
-     \</action></match></rule>
-   \</outboundrules>
-\</rewrite>
-</pre>
-
-<p>IIS8里提供了一个简单配制来直接关闭Etag，</p>
-<pre>
-\<element name="clientCache">
-   \<attribute name="cacheControlMode" type="enum" defaultvalue="NoControl">
-          \<enum name="NoControl" value="0">
-          \<enum name="DisableCache" value="1">
-          \<enum name="UseMaxAge" value="2">
-          \<enum name="UseExpires" value="3">
-  \</enum></enum></enum></enum></attribute>
-  \<attribute name="cacheControlMaxAge" type="timeSpan" defaultvalue="1.00:00:00">
-  \<attribute name="httpExpires" type="string">
-  \<attribute name="cacheControlCustom" type="string"> 
-  \<attribute name="setEtag" type="bool" defaultvalue="false">
-\</attribute></attribute></attribute></attribute></element>
-</pre>
-
+<p>如果你遇到这样的问题，IIS 7中可以通过如下方法将Etag去掉，使用URL Rewrite，然后在web.config中添加如下配制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;rewrite&gt;</div><div class="line">   &lt;outboundRules&gt;</div><div class="line">     &lt;rule name=&quot;Remove ETag&quot;&gt;</div><div class="line">         &lt;match serverVariable=&quot;RESPONSE_ETag&quot; pattern=&quot;.+&quot; /&gt;</div><div class="line">         &lt;action type=&quot;Rewrite&quot; value=&quot;&quot; /&gt;</div><div class="line">     &lt;/rule&gt;</div><div class="line">   &lt;/outboundRules&gt;</div><div class="line">&lt;/rewrite&gt;</div></pre></td></tr></table></figure></p>
+<p>IIS8里提供了一个简单配制来直接关闭Etag，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;element name=&quot;clientCache&quot;&gt;</div><div class="line">   &lt;attribute name=&quot;cacheControlMode&quot; type=&quot;enum&quot; defaultValue=&quot;NoControl&quot;&gt;</div><div class="line">          &lt;enum name=&quot;NoControl&quot; value=&quot;0&quot; /&gt;</div><div class="line">          &lt;enum name=&quot;DisableCache&quot; value=&quot;1&quot; /&gt;</div><div class="line">          &lt;enum name=&quot;UseMaxAge&quot; value=&quot;2&quot; /&gt;</div><div class="line">          &lt;enum name=&quot;UseExpires&quot; value=&quot;3&quot; /&gt;</div><div class="line">  &lt;/attribute&gt;</div><div class="line">  &lt;attribute name=&quot;cacheControlMaxAge&quot; type=&quot;timeSpan&quot; defaultValue=&quot;1.00:00:00&quot; /&gt;</div><div class="line">  &lt;attribute name=&quot;httpExpires&quot; type=&quot;string&quot; /&gt;</div><div class="line">  &lt;attribute name=&quot;cacheControlCustom&quot; type=&quot;string&quot; /&gt; </div><div class="line">  &lt;attribute name=&quot;setEtag&quot; type=&quot;bool&quot; defaultValue=&quot;false&quot; /&gt;</div><div class="line">&lt;/element&gt;</div></pre></td></tr></table></figure></p>
 <h4 id="2-5尽早flush输出"><a href="#2-5尽早flush输出" class="headerlink" title="2.5尽早flush输出"></a>2.5尽早flush输出</h4><p>网页后台程序中我们知道有个方法叫Response.Flush()，一般我们调用它都是在程序末尾，但注意这个方法可以被调用多次。目的是可以将现有的缓存中的回复内容先发给客户端，让客户端“有活干”。</p>
 <p>那在什么时候调用这个方法比较好呢？一般情况下我们可以在对于需要加载比较多外部脚本或者样式表时可以提前调用一次，客户端收到了关于脚本或其他外部资源的链接可以并行的先发请求去下载，服务器接下来把后续的处理结果发给客户端。</p>
 <h4 id="2-6使用GET-Ajax请求"><a href="#2-6使用GET-Ajax请求" class="headerlink" title="2.6使用GET Ajax请求"></a>2.6使用GET Ajax请求</h4><p>浏览器在实现XMLHttpRequest POST的时候分成两步，先发header，然后发送数据。而GET却可以用一个TCP报文完成请求。另外GET从语义上来讲是去服务器取数据，而POST则是向服务器发送数据，所以我们使用Ajax请求数据的时候尽量通过GET来完成。</p>
@@ -228,7 +202,7 @@ Content-Type: text/html
 <h4 id="2-7避免空的图片src"><a href="#2-7避免空的图片src" class="headerlink" title="2.7避免空的图片src"></a>2.7避免空的图片src</h4><p>空的图片src仍然会使浏览器发送请求到服务器，这样完全是浪费时间，而且浪费服务器的资源。尤其是你的网站每天被很多人访问的时候，这种空请求造成的伤害不容忽略。</p>
 <p>浏览器如此实现也是根据RFC 3986 - Uniform Resource Identifiers标准，空的src被定义为当前页面。</p>
 <p>所以注意我们的网页中是否存在这样的代码</p>
-<p>straight HTML<br>\<img src="/2016/08/08/前端性能优化的小技巧/"></p>
+<p>straight HTML<br><code>&lt;img src=&quot;&quot;&gt;</code></p>
 <p>JavaScript<br>var img = new Image();<br>img.src = “”;</p>
 <h3 id="3-Cookie"><a href="#3-Cookie" class="headerlink" title="3.Cookie"></a>3.Cookie</h3><h4 id="3-1减少Cookie大小"><a href="#3-1减少Cookie大小" class="headerlink" title="3.1减少Cookie大小"></a>3.1减少Cookie大小</h4><p>Cookie被用来做认证或个性化设置，其信息被包含在http报文头中，对于cookie我们要注意以下几点，来提高请求的响应速度，</p>
 <ul>
@@ -242,29 +216,7 @@ Content-Type: text/html
 <p>也有一些网站需要在二级域名上应用cookie，所有的子域都会继承，这种情况下一般会再购买一个专门的域名来存放cookie-free的静态资源。例如Yahoo!的yimg.com，YouTube的ytimg.com等。</p>
 <h4 id="4-CSS"><a href="#4-CSS" class="headerlink" title="4.CSS"></a>4.CSS</h4><h4 id="4-1将样式表置顶"><a href="#4-1将样式表置顶" class="headerlink" title="4.1将样式表置顶"></a>4.1将样式表置顶</h4><p>经样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。</p>
 <p>如果将样式表放在底部，浏览器会拒绝渲染已经下载的网页，因为大多数浏览器在实现时都努力避免重绘，样式表中的内容是绘制网页的关键信息，没有下载下来之前只好对不起观众了。</p>
-<h4 id="4-2避免CSS表达式"><a href="#4-2避免CSS表达式" class="headerlink" title="4.2避免CSS表达式"></a>4.2避免CSS表达式</h4><p>CSS表达式可以动态的设置CSS属性，在IE5-IE8中支持，其他浏览器中表达式会被忽略。例如下面表达式在不同时间设置不同的背景颜色。<br><code>background-color: expression( (new Date()).getHours()%2 ? &quot;#B8D4FF&quot; : &quot;#F08A00&quot; );</code><br>CSS表达式的问题在于它被重新计算的次数远比我们想象的要多，不仅在网页绘制或大小改变时计算，即使我们滚动屏幕或者移动鼠标的时候也在计算，因此我们还是尽量避免使用它来防止使用不当而造成的性能损耗。<br>如果想达到类似的效果我们可以通过简单的脚本做到。</p>
-<pre>
-\<html>
-\<head>
-\</head>
-\<body>
-\<script type="text/javascript">
-var currentTime = new Date().getHours();
-if (currentTime%2) {
-    if (document.body) {
-        document.body.style.background = "#B8D4FF";
-    }
-}
-else {
-    if (document.body) {
-        document.body.style.background = "#F08A00";
-    }
-}
-\</script>
-\</body>
-\</html>
-</pre>
-
+<h4 id="4-2避免CSS表达式"><a href="#4-2避免CSS表达式" class="headerlink" title="4.2避免CSS表达式"></a>4.2避免CSS表达式</h4><p>CSS表达式可以动态的设置CSS属性，在IE5-IE8中支持，其他浏览器中表达式会被忽略。例如下面表达式在不同时间设置不同的背景颜色。<br><code>background-color: expression( (new Date()).getHours()%2 ? &quot;#B8D4FF&quot; : &quot;#F08A00&quot; );</code><br>CSS表达式的问题在于它被重新计算的次数远比我们想象的要多，不仅在网页绘制或大小改变时计算，即使我们滚动屏幕或者移动鼠标的时候也在计算，因此我们还是尽量避免使用它来防止使用不当而造成的性能损耗。<br>如果想达到类似的效果我们可以通过简单的脚本做到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">var currentTime = new Date().getHours();</div><div class="line">if (currentTime%2) &#123;</div><div class="line">    if (document.body) &#123;</div><div class="line">        document.body.style.background = &quot;#B8D4FF&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">else &#123;</div><div class="line">    if (document.body) &#123;</div><div class="line">        document.body.style.background = &quot;#F08A00&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
 <h4 id="4-3用代替-import"><a href="#4-3用代替-import" class="headerlink" title="4.3用代替@import"></a>4.3用<link>代替@import</h4><p>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
 <h4 id="4-4避免使用Filters"><a href="#4-4避免使用Filters" class="headerlink" title="4.4避免使用Filters"></a>4.4避免使用Filters</h4><p>AlphaImageLoad也是IE5.5 - IE8中支持，这种滤镜的使用会导致图片在下载的时候阻塞网页绘制，另外使用这种滤镜会导致内存使用量的问题。IE9中已经不再支持。</p>
 <h3 id="5-JavaScript"><a href="#5-JavaScript" class="headerlink" title="5.JavaScript"></a>5.JavaScript</h3><h4 id="5-1将脚本置底"><a href="#5-1将脚本置底" class="headerlink" title="5.1将脚本置底"></a>5.1将脚本置底</h4><p>HTTP/1.1 specification建议浏览器对同一个hostname不要超过两个并行下载连接， 所以当你从多个domain下载图片的时候可以提高并行下载连接数量。但是当脚本在下载的时候，即使是来自不同的hostname浏览器也不会下载其他资源，因为浏览器要在脚本下载之后依次解析和执行。</p>
